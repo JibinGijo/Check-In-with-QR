@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Attendee, CSVRow } from '../types';
 import { supabase } from '../lib/supabase';
+import { v4 as uuidv4 } from '../utils/uuid';
 
 interface AttendeeContextType {
   attendees: Attendee[];
@@ -49,7 +50,7 @@ export const AttendeeProvider: React.FC<{ children: ReactNode }> = ({ children }
       email: attendee.email,
       name: attendee.name,
       organization: attendee.organization || null,
-      qr_code: btoa(attendee.email), // Use base64 encoded email as QR code
+      qr_code: uuidv4(),
       checked_in: false,
       email_sent: false
     }));
